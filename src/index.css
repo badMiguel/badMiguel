@@ -12,23 +12,24 @@ html {
 }
 
 :root {
-    --bg-1: #191724; 
+    --bg-1: #191724;
     --bg-2: #1f1d2e;
     --bg-3: #26233a;
     --bg-4: #6e6a86;
     --bg-5: #908caa;
 
-    --danger: #eb6f92; 
+    --danger: #eb6f92;
     --warning: #f6c177;
     --success: #31748f;
-    
-    --font-primary: #e0def4; 
 
+    --font-primary: #e0def4;
+
+    --font-size-title: 5rem;
     --font-size-header: 3rem;
     --font-size-body: 2rem;
 
-    --font-family-header: 'Poppins', Arial, Helvetica, sans-serif;
-    --font-family-body: 'Open Sans', Arial, Helvetica, sans-serif;
+    --font-family-header: "Poppins", Arial, Helvetica, sans-serif;
+    --font-family-body: "Open Sans", Arial, Helvetica, sans-serif;
 }
 
 body {
@@ -36,4 +37,38 @@ body {
     font-size: var(--font-size-body);
     background-color: var(--bg-1);
     color: var(--font-primary);
+
+    width: 80%;
+    max-width: 100rem;
+    margin: auto;
+}
+
+h1 {
+    font-size: var(--font-size-header);
+}
+
+.title {
+    font-size: var(--font-size-title);
+}
+
+p {
+    line-height: 2;
+}
+
+.about-me-container {
+    margin: 5rem 0;
+}
+
+.about-me-content-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.profile-picture {
+    width: 30%;
+}
+
+.about-me-content {
+    width: 60%;
 }

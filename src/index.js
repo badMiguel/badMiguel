@@ -1,8 +1,4 @@
-const data = { foo: "bar" };
-
-function main() {
-    console.log(data.foo);
-}
+function main() { }
 
 document.addEventListener("DOMContentLoaded", () => {
     main();
