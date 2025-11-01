@@ -41,6 +41,8 @@ body {
     width: 80%;
     max-width: 100rem;
     margin: auto;
+
+    scroll-behavior: smooth;
 }
 
 h1 {
@@ -55,7 +57,9 @@ p {
     line-height: 2;
 }
 
-.about-me-container {
+.about-me-container,
+.tech-stack-container,
+.projects-container {
     margin: 5rem 0;
 }
 
@@ -71,4 +75,24 @@ p {
 
 .about-me-content {
     width: 60%;
+}
+
+.tech-stack-content-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+    margin: 2rem 0;
+}
+
+.tech-stack-content-item-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    width: 80%;
+    margin: auto;
+}
+
+.technology-logo {
+    width: 10rem;
 }
