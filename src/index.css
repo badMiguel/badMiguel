@@ -75,7 +75,7 @@ p {
 
 .tech-stack-container,
 .projects-container {
-    margin: 0 0 10rem 0;
+    padding: 10rem 0 0 0;
 }
 
 .home-container-spacing,
@@ -94,7 +94,7 @@ p {
 }
 
 .profile-picture {
-    width: 30%;
+    max-width: 30%;
 }
 
 .about-me-content {
@@ -123,7 +123,7 @@ p {
 }
 
 .technology-logo {
-    width: 10rem;
+    max-width: 10rem;
 }
 
 .project-content-container {
@@ -137,5 +137,5 @@ p {
 }
 
 .project-image {
-    width: 20rem;
+    max-width: 20rem;
 }
