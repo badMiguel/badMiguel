@@ -13,17 +13,37 @@ html {
 }
 
 :root {
-    --bg-1: #191724;
-    --bg-2: #1f1d2e;
-    --bg-3: #26233a;
-    --bg-4: #6e6a86;
-    --bg-5: #908caa;
+    --dark-bg-1: #191724;
+    --dark-bg-2: #1f1d2e;
+    --dark-bg-3: #26233a;
+    --dark-font-1: #e0def4;
+    --dark-font-2: #6e6a86;
+    --dark-font-3: #908caa;
+    --dark-love: #eb6f92;
+    --dark-gold: #f6c177;
+    --dark-rose: #ebbcba;
+    --dark-pine: #31748f;
+    --dark-foam: #9ccfd8;
+    --dark-iris: #c4a7e7;
+    --dark-highlight-1: #21202e;
+    --dark-highlight-2: #403d52;
+    --dark-highlight-3: #524f67;
 
-    --danger: #eb6f92;
-    --warning: #f6c177;
-    --success: #31748f;
-
-    --font-primary: #e0def4;
+    --light-bg-1: #faf4ed;
+    --light-bg-2: #fffaf3;
+    --light-bg-3: #f2e9e1;
+    --light-font-1: #9893a5;
+    --light-font-2: #797593;
+    --light-font-3: #575279;
+    --light-love: #b4637a;
+    --light-gold: #ea9d34;
+    --light-rose: #d7827e;
+    --light-pine: #286983;
+    --light-foam: #56949f;
+    --light-iris: #907aa9;
+    --light-highlight-1: #f4ede9;
+    --light-highlight-2: #dfdad9;
+    --light-highlight-3: #cecacd;
 
     --font-size-title: 5rem;
     --font-size-header: 3rem;
@@ -36,8 +56,8 @@ html {
 body {
     font-family: var(--font-family-body);
     font-size: var(--font-size-body);
-    background-color: var(--bg-1);
-    color: var(--font-primary);
+    background-color: var(--dark-bg-1);
+    color: var(--dark-font-1);
 }
 
 nav {
@@ -47,8 +67,13 @@ nav {
     gap: 3rem;
 
     top: 50%;
-    left: calc((100% - 100rem)/4);
+    left: calc((100% - 100rem) / 4);
     transform: translate(-50%, -50%);
+
+    a {
+        text-decoration: none;
+        color: var(--dark-font-1);
+    }
 }
 
 h1 {
