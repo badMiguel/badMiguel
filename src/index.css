@@ -245,3 +245,9 @@ p {
     max-width: 20rem;
     height: auto;
 }
+
+.copyright {
+    font-size: 1.6rem;
+    text-align: center;
+    margin: 0 0 5rem 0;
+}

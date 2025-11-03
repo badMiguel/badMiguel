@@ -125,6 +125,8 @@ function getCurrentPosition(positionY) {
 }
 
 function main() {
+    document.getElementById("copyright-year").textContent = new Date().getFullYear();
+
     const sections = {
         home: "#home",
         about: "#about-me",
