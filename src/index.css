@@ -79,7 +79,6 @@ html {
     background-color: var(--light-bg-3);
 }
 
-
 .light-font-1 {
     color: var(--light-font-1);
 }
@@ -131,7 +130,8 @@ p {
 .home-container,
 .about-me-container,
 .tech-stack-container,
-.projects-container {
+.projects-container,
+.contact-container {
     min-height: 100vh;
     display: flex;
     flex-direction: column;
@@ -154,7 +154,8 @@ p {
 .home-container-spacing,
 .about-me-container-spacing,
 .tech-stack-container-spacing,
-.projects-container-spacing {
+.projects-container-spacing,
+.contact-container-spacing {
     width: 70%;
     max-width: 80rem;
     margin: auto;

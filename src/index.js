@@ -132,6 +132,7 @@ function main() {
         about: "#about-me",
         tech: "#tech-stack",
         project: "#projects",
+        contact: "#contact",
     };
 
     const sectionContainer = {
@@ -139,6 +140,7 @@ function main() {
         about: document.querySelector(".about-me-container"),
         tech: document.querySelector(".tech-stack-container"),
         project: document.querySelector(".projects-container"),
+        contact: document.querySelector(".contact-container"),
     };
 
     const positionY = {
@@ -157,6 +159,10 @@ function main() {
         project: {
             start: getStartPos(sectionContainer.project),
             end: getEndPos(sectionContainer.project),
+        },
+        contact: {
+            start: getStartPos(sectionContainer.contact),
+            end: getEndPos(sectionContainer.contact),
         },
     };
 
@@ -182,7 +188,7 @@ function main() {
         changeLinkTheme("light", prevClickedNavLinkEl, clickedNavLinkEl);
     }
 
-    const lightGroup = ["home", "tech"];
+    const lightGroup = ["home", "tech", "contact"];
     let lastSection = currentPosition.name;
 
     document.addEventListener("scroll", () => {
