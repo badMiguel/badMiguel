@@ -99,11 +99,15 @@ p {
 }
 
 .tech-stack-container {
-    padding: 50vh 0;
+    padding: 45vh 0;
 }
 
 .projects-container {
-    padding: 50vh 0 0 0;
+    padding: 45vh 0 0 0;
+}
+
+#tech-stack, #projects {
+    padding: 5vh 0 0 0;
 }
 
 .home-container-spacing,
