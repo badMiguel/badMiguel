@@ -76,6 +76,10 @@ function changeTheme(theme) {
             el.classList.remove("dark-bg-2");
             el.classList.add("light-bg-2");
         });
+        document.querySelectorAll(".project-content-item-container").forEach((el) => {
+            el.classList.remove("dark-bg-3");
+            el.classList.add("light-bg-3");
+        });
     } else {
         document.querySelector("body").style.backgroundColor = colors.darkBg1;
         document.querySelector("body").style.color = colors.darkFont1;
@@ -86,6 +90,10 @@ function changeTheme(theme) {
         document.querySelectorAll(".tech-stack-content-item-container").forEach((el) => {
             el.classList.remove("light-bg-2");
             el.classList.add("dark-bg-2");
+        });
+        document.querySelectorAll(".project-content-item-container").forEach((el) => {
+            el.classList.remove("light-bg-3");
+            el.classList.add("dark-bg-3");
         });
     }
 }
