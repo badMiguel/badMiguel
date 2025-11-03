@@ -241,10 +241,6 @@ p {
 
 .project-content-item-container:hover {
     background-color: var(--dark-bg-2);
-
-    p {
-        color: var(--dark-font-2);
-    }
 }
 
 .project-image {
@@ -256,4 +252,50 @@ p {
     font-size: 1.6rem;
     text-align: center;
     margin: 0 0 5rem 0;
+}
+
+.project-link-container {
+    display: flex;
+    margin: 2rem 0 0 0;
+    justify-content: flex-end;
+    gap: 2rem;
+}
+
+.project-link {
+    text-decoration: none;
+    font-weight: 500;
+    padding: 0.5rem 2.5rem;
+    border-radius: 1rem;
+    text-align: center;
+    color: var(--dark-highlight-1);
+    font-size: 1.8rem;
+    transition: background-color 0.15s ease, color 0.15s ease;
+}
+
+.demo-link {
+    background-color: var(--dark-foam);
+}
+
+.demo-link:hover {
+    background-color: var(--light-foam);
+    color: var(--light-highlight-1);
+
+    svg,
+    path {
+        fill: var(--light-highlight-1);
+    }
+}
+
+.source-link {
+    background-color: var(--dark-iris);
+}
+
+.source-link:hover {
+    background-color: var(--light-iris);
+    color: var(--light-highlight-1);
+
+    svg,
+    path {
+        fill: var(--light-highlight-1);
+    }
 }
