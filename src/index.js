@@ -32,8 +32,20 @@ const colors = {
     lightHighlight3: "#cecacd",
 };
 
-function snapToNextSection(sections, section) {
-    window.location.href = sections[section];
+function snapToNextSection(sections, lastSection, currentSection, currentPosition, positionY) {
+    if (currentPosition.end - currentPosition.start <= window.innerHeight) {
+        window.location.href = sections[currentSection];
+        return;
+    }
+
+    const currHeight = positionY[currentSection].start;
+    const prevHeight = positionY[lastSection].start;
+
+    if (currHeight > prevHeight) {
+        window.location.href = sections[currentSection];
+    } else {
+        window.scrollTo({ top: currentPosition.end - window.innerHeight / 2 });
+    }
 }
 
 function changeLinkTheme(theme, prevClickedNavLinkEl, clickedNavLinkEl) {
@@ -192,6 +204,7 @@ function main() {
     let lastSection = currentPosition.name;
 
     document.addEventListener("scroll", () => {
+        console.log(window.scrollY);
         currentPosition = getCurrentPosition(positionY);
 
         if (skipSnap) {
@@ -202,9 +215,14 @@ function main() {
         }
 
         if (currentPosition.name !== lastSection) {
+            snapToNextSection(
+                sections,
+                lastSection,
+                currentPosition.name,
+                currentPosition.pos,
+                positionY
+            );
             lastSection = currentPosition.name;
-            snapToNextSection(sections, lastSection);
-
             clickedNavLink = currentPosition.name;
             prevClickedNavLinkEl = clickedNavLinkEl;
             clickedNavLinkEl = document.getElementById(`${clickedNavLink}-link`);
