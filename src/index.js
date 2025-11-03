@@ -32,6 +32,17 @@ const colors = {
     lightHighlight3: "#cecacd",
 };
 
+function snapToNextSection(section) {
+    const sections = {
+        home: "#home",
+        about: "#about-me",
+        tech: "#tech-stack",
+        project: "#projects",
+    };
+
+    window.location.href = sections[section];
+}
+
 function changeTheme(theme) {
     if (theme === "light") {
         document.querySelector("body").style.backgroundColor = colors.lightBg1;
@@ -66,44 +77,54 @@ function getEndPos(element) {
     );
 }
 
+function getCurrentPosition(positionY) {
+    for (var pos in positionY) {
+        if (positionY[pos].start <= window.scrollY && positionY[pos].end >= window.scrollY) {
+            return { name: pos, pos: positionY[pos] };
+        }
+    }
+}
+
 function scrollEffects() {
-    const sections = {
+    const sectionContainer = {
         home: document.querySelector(".home-container"),
         about: document.querySelector(".about-me-container"),
         tech: document.querySelector(".tech-stack-container"),
         project: document.querySelector(".projects-container"),
     };
 
-    console.log(sections.home);
-    const pos = {
+    const positionY = {
         home: {
-            start: getStartPos(sections.home),
-            end: getEndPos(sections.home),
+            start: getStartPos(sectionContainer.home),
+            end: getEndPos(sectionContainer.home),
         },
         about: {
-            start: getStartPos(sections.about),
-            end: getEndPos(sections.about),
+            start: getStartPos(sectionContainer.about),
+            end: getEndPos(sectionContainer.about),
         },
         tech: {
-            start: getStartPos(sections.tech),
-            end: getEndPos(sections.tech),
+            start: getStartPos(sectionContainer.tech),
+            end: getEndPos(sectionContainer.tech),
         },
         project: {
-            start: getStartPos(sections.project),
-            end: getEndPos(sections.project),
+            start: getStartPos(sectionContainer.project),
+            end: getEndPos(sectionContainer.project),
         },
     };
 
-    const lightGroup = [pos.home, pos.tech];
+    const lightGroup = ["home", "tech"];
+    let currentPosition = getCurrentPosition(positionY);
+    let lastSection = currentPosition.name;
 
     document.addEventListener("scroll", () => {
-        lightGroup.some((el) => {
-            if (el.start <= window.scrollY && el.end >= window.scrollY) {
-                return true;
-            } else {
-                return false;
-            }
-        })
+        currentPosition = getCurrentPosition(positionY);
+
+        if (currentPosition.name !== lastSection) {
+            lastSection = currentPosition.name;
+            snapToNextSection(lastSection);
+        }
+
+        lightGroup.some((el) => (currentPosition.name === el ? true : false))
             ? changeTheme("light")
             : changeTheme("dark");
     });
