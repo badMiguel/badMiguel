@@ -137,9 +137,9 @@ p {
 }
 
 .profile-picture {
-    width: 105%;
-    height: 105%;
-    transform: translateX(5%);
+    width: 110%;
+    height: 110%;
+    transform: translateX(0.5%);
     object-fit: cover;
 }
 
