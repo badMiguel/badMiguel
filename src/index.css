@@ -215,7 +215,23 @@ p {
     display: flex;
     align-items: center;
     gap: 5rem;
-    margin: 0 0 10rem 0;
+    margin: 0 0 5rem 0;
+    padding: 2.5rem 2rem;
+    background-color: var(--dark-bg-3);
+    border-radius: 1rem;
+
+    p {
+        font-size: 1.8rem;
+        color: var(--dark-font-3);
+    }
+}
+
+.project-content-item-container:hover {
+    background-color: var(--dark-bg-2);
+
+    p {
+        color: var(--dark-font-2);
+    }
 }
 
 .project-image {
