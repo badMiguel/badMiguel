@@ -44,7 +44,7 @@ function snapToNextSection(sections, lastSection, currentSection, currentPositio
     if (currHeight > prevHeight) {
         window.location.href = sections[currentSection];
     } else {
-        window.scrollTo({ top: currentPosition.end - window.innerHeight / 2 });
+        window.scrollTo({ top: currentPosition.end - window.innerHeight / 3 });
     }
 }
 
@@ -260,7 +260,7 @@ function main() {
             return;
         }
 
-        if (currentPosition.name !== lastSection) {
+        if (currentPosition && currentPosition.name !== lastSection) {
             snapToNextSection(
                 sections,
                 lastSection,
