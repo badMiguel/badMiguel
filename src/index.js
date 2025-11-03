@@ -65,11 +65,17 @@ function changeTheme(theme) {
         document.querySelectorAll(".nav-link").forEach((el) => {
             el.style.color = colors.lightFont1;
         });
+        document.querySelectorAll(".tech-stack-content-item-container").forEach((el) => {
+            el.style.backgroundColor = colors.lightBg2;
+        });
     } else {
         document.querySelector("body").style.backgroundColor = colors.darkBg1;
         document.querySelector("body").style.color = colors.darkFont1;
         document.querySelectorAll(".nav-link").forEach((el) => {
             el.style.color = colors.darkFont1;
+        });
+        document.querySelectorAll(".tech-stack-content-item-container").forEach((el) => {
+            el.style.backgroundColor = colors.darkBg2;
         });
     }
 }
