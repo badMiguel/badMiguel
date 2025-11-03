@@ -48,31 +48,37 @@ function snapToNextSection(sections, lastSection, currentSection, currentPositio
     }
 }
 
-function changeLinkTheme(theme, prevClickedNavLinkEl, clickedNavLinkEl) {
-    if (theme === "light") {
-        if (prevClickedNavLinkEl) {
-            prevClickedNavLinkEl.style.backgroundColor = null;
+function changeLinkTheme(
+    theme,
+    prevClickedNavLinkEl,
+    clickedNavLinkEl,
+    hoveredElement,
+    lastSection
+) {
+    if (prevClickedNavLinkEl) {
+        prevClickedNavLinkEl.classList.remove("light-link-active");
+        prevClickedNavLinkEl.classList.remove("dark-link-active");
+        prevClickedNavLinkEl.classList.remove("light-font-1");
+        prevClickedNavLinkEl.classList.remove("dark-font-1");
+    }
 
-            prevClickedNavLinkEl.classList.remove("light-link-active");
-            prevClickedNavLinkEl.classList.remove("dark-link-active");
-            prevClickedNavLinkEl.classList.remove("dark-font-1");
-            prevClickedNavLinkEl.classList.add("light-font-1");
-        }
+    if (theme === "light") {
+        prevClickedNavLinkEl.classList.add("light-font-1");
         if (clickedNavLinkEl) {
             clickedNavLinkEl.classList.remove("light-font-1");
             clickedNavLinkEl.classList.add("light-link-active");
         }
     } else {
-        if (prevClickedNavLinkEl) {
-            prevClickedNavLinkEl.classList.remove("light-link-active");
-            prevClickedNavLinkEl.classList.remove("dark-link-active");
-            prevClickedNavLinkEl.classList.remove("light-font-1");
-            prevClickedNavLinkEl.classList.add("dark-font-1");
-        }
+        prevClickedNavLinkEl.classList.add("dark-font-1");
         if (clickedNavLinkEl) {
             clickedNavLinkEl.classList.remove("dark-font-1");
             clickedNavLinkEl.classList.add("dark-link-active");
         }
+    }
+
+    if (hoveredElement.name === lastSection) {
+        hoveredElement.element.classList.remove("dark-hover-link");
+        hoveredElement.element.classList.remove("light-hover-link");
     }
 }
 
@@ -83,6 +89,11 @@ function changeTheme(theme) {
         document.querySelectorAll(".nav-link").forEach((el) => {
             el.classList.remove("dark-font-1");
             el.classList.add("light-font-1");
+
+            if (el.classList.contains("dark-hover-link")) {
+                el.classList.remove("dark-hover-link");
+                el.classList.add("light-hover-link");
+            }
         });
         document.querySelectorAll(".tech-stack-content-item-container").forEach((el) => {
             el.classList.remove("dark-bg-2");
@@ -98,6 +109,11 @@ function changeTheme(theme) {
         document.querySelectorAll(".nav-link").forEach((el) => {
             el.classList.remove("light-font-1");
             el.classList.add("dark-font-1");
+
+            if (el.classList.contains("light-hover-link")) {
+                el.classList.remove("light-hover-link");
+                el.classList.add("dark-hover-link");
+            }
         });
         document.querySelectorAll(".tech-stack-content-item-container").forEach((el) => {
             el.classList.remove("light-bg-2");
@@ -139,6 +155,7 @@ function getCurrentPosition(positionY) {
 function main() {
     document.getElementById("copyright-year").textContent = new Date().getFullYear();
 
+    const lightGroup = ["home", "tech", "contact"];
     const sections = {
         home: "#home",
         about: "#about-me",
@@ -179,19 +196,51 @@ function main() {
     };
 
     let currentPosition = getCurrentPosition(positionY);
-
     let skipSnap = false;
     let clickedNavLink = currentPosition.name;
     let clickedNavLinkEl = document.getElementById(`${clickedNavLink}-link`);
-    let prevClickedNavLinkEl = null;
+    let prevClickedNavLinkEl = clickedNavLinkEl;
+    let hoveredElement = { name: "", element: null };
     const navLinks = document.querySelectorAll(".nav-link");
 
     navLinks.forEach((element) => {
+        element.addEventListener("mouseover", () => {
+            if (currentPosition.name === element.id.split("-")[0]) {
+                return;
+            }
+
+            hoveredElement = { name: element.id.split("-")[0], element: element };
+
+            if (lightGroup.some((el) => (currentPosition.name === el ? true : false))) {
+                element.classList.add("light-hover-link");
+            } else {
+                element.classList.add("dark-hover-link");
+            }
+        });
+
+        element.addEventListener("mouseout", () => {
+            hoveredElement = { name: "", element: null };
+
+            element.classList.remove("light-hover-link");
+            element.classList.remove("dark-hover-link");
+        });
+
         element.addEventListener("click", () => {
+            element.classList.remove("dark-hover-link");
+            element.classList.remove("light-hover-link");
+
             skipSnap = true;
             clickedNavLink =
                 Object.keys(sections).find((el) => sections[el] === element.getAttribute("href")) ||
                 "home";
+            prevClickedNavLinkEl = clickedNavLinkEl;
+            clickedNavLinkEl = document.getElementById(`${clickedNavLink}-link`);
+
+            if (lightGroup.some((el) => (currentPosition.name === el ? true : false))) {
+                changeLinkTheme("light", prevClickedNavLinkEl, clickedNavLinkEl);
+            } else {
+                changeLinkTheme("dark", prevClickedNavLinkEl, clickedNavLinkEl);
+            }
         });
     });
 
@@ -199,12 +248,9 @@ function main() {
         changeTheme("light");
         changeLinkTheme("light", prevClickedNavLinkEl, clickedNavLinkEl);
     }
-
-    const lightGroup = ["home", "tech", "contact"];
     let lastSection = currentPosition.name;
 
     document.addEventListener("scroll", () => {
-        console.log(window.scrollY);
         currentPosition = getCurrentPosition(positionY);
 
         if (skipSnap) {
@@ -230,10 +276,22 @@ function main() {
 
         if (lightGroup.some((el) => (currentPosition.name === el ? true : false))) {
             changeTheme("light");
-            changeLinkTheme("light", prevClickedNavLinkEl, clickedNavLinkEl);
+            changeLinkTheme(
+                "light",
+                prevClickedNavLinkEl,
+                clickedNavLinkEl,
+                hoveredElement,
+                lastSection
+            );
         } else {
             changeTheme("dark");
-            changeLinkTheme("dark", prevClickedNavLinkEl, clickedNavLinkEl);
+            changeLinkTheme(
+                "dark",
+                prevClickedNavLinkEl,
+                clickedNavLinkEl,
+                hoveredElement,
+                lastSection
+            );
         }
     });
 }

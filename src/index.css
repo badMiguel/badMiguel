@@ -87,6 +87,14 @@ html {
     color: var(--dark-font-1);
 }
 
+.light-hover-link {
+    background-color: var(--light-highlight-2);
+}
+
+.dark-hover-link {
+    background-color: var(--dark-highlight-2);
+}
+
 body {
     font-family: var(--font-family-body);
     font-size: var(--font-size-body);
