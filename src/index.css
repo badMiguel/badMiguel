@@ -189,7 +189,6 @@ p {
     text-align: center;
     padding: 3rem 2rem;
     gap: 2rem;
-    background-color: var(--light-bg-2);
     border-radius: 1rem;
     transition: background-color 0.2s ease;
 
