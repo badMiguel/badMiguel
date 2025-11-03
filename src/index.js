@@ -297,6 +297,6 @@ function main() {
     });
 }
 
-document.addEventListener("DOMContentLoaded", () => {
+window.addEventListener("load", () => {
     main();
 });
