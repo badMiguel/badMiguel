@@ -76,7 +76,7 @@ function changeLinkTheme(
         }
     }
 
-    if (hoveredElement.name === lastSection) {
+    if (hoveredElement && hoveredElement.name === lastSection) {
         hoveredElement.element.classList.remove("dark-hover-link");
         hoveredElement.element.classList.remove("light-hover-link");
     }
