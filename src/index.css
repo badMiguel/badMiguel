@@ -114,8 +114,8 @@ p {
 .about-me-container-spacing,
 .tech-stack-container-spacing,
 .projects-container-spacing {
-    width: 80%;
-    max-width: 100rem;
+    width: 70%;
+    max-width: 80rem;
     margin: auto;
 }
 
@@ -164,10 +164,12 @@ p {
 
 .project-content-item-container {
     display: flex;
+    align-items: center;
     gap: 5rem;
     margin: 0 0 10rem 0;
 }
 
 .project-image {
     max-width: 20rem;
+    height: auto;
 }
