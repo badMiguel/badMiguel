@@ -40,20 +40,26 @@ function changeLinkTheme(theme, prevClickedNavLinkEl, clickedNavLinkEl) {
     if (theme === "light") {
         if (prevClickedNavLinkEl) {
             prevClickedNavLinkEl.style.backgroundColor = null;
-            prevClickedNavLinkEl.style.color = colors.lightFont1;
+
+            prevClickedNavLinkEl.classList.remove("light-link-active");
+            prevClickedNavLinkEl.classList.remove("dark-link-active");
+            prevClickedNavLinkEl.classList.remove("dark-font-1");
+            prevClickedNavLinkEl.classList.add("light-font-1");
         }
         if (clickedNavLinkEl) {
-            clickedNavLinkEl.style.backgroundColor = colors.lightRose;
-            clickedNavLinkEl.style.color = colors.lightHighlight1;
+            clickedNavLinkEl.classList.remove("light-font-1");
+            clickedNavLinkEl.classList.add("light-link-active");
         }
     } else {
         if (prevClickedNavLinkEl) {
-            prevClickedNavLinkEl.style.backgroundColor = null;
-            prevClickedNavLinkEl.style.color = colors.darkFont1;
+            prevClickedNavLinkEl.classList.remove("light-link-active");
+            prevClickedNavLinkEl.classList.remove("dark-link-active");
+            prevClickedNavLinkEl.classList.remove("light-font-1");
+            prevClickedNavLinkEl.classList.add("dark-font-1");
         }
         if (clickedNavLinkEl) {
-            clickedNavLinkEl.style.backgroundColor = colors.darkRose;
-            clickedNavLinkEl.style.color = colors.darkHighlight1;
+            clickedNavLinkEl.classList.remove("dark-font-1");
+            clickedNavLinkEl.classList.add("dark-link-active");
         }
     }
 }
@@ -63,19 +69,23 @@ function changeTheme(theme) {
         document.querySelector("body").style.backgroundColor = colors.lightBg1;
         document.querySelector("body").style.color = colors.lightFont1;
         document.querySelectorAll(".nav-link").forEach((el) => {
-            el.style.color = colors.lightFont1;
+            el.classList.remove("dark-font-1");
+            el.classList.add("light-font-1");
         });
         document.querySelectorAll(".tech-stack-content-item-container").forEach((el) => {
-            el.style.backgroundColor = colors.lightBg2;
+            el.classList.remove("dark-bg-2");
+            el.classList.add("light-bg-2");
         });
     } else {
         document.querySelector("body").style.backgroundColor = colors.darkBg1;
         document.querySelector("body").style.color = colors.darkFont1;
         document.querySelectorAll(".nav-link").forEach((el) => {
-            el.style.color = colors.darkFont1;
+            el.classList.remove("light-font-1");
+            el.classList.add("dark-font-1");
         });
         document.querySelectorAll(".tech-stack-content-item-container").forEach((el) => {
-            el.style.backgroundColor = colors.darkBg2;
+            el.classList.remove("light-bg-2");
+            el.classList.add("dark-bg-2");
         });
     }
 }
