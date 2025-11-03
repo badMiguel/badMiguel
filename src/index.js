@@ -36,9 +36,15 @@ function changeTheme(theme) {
     if (theme === "light") {
         document.querySelector("body").style.backgroundColor = colors.lightBg1;
         document.querySelector("body").style.color = colors.lightFont1;
+        document.querySelectorAll(".nav-link").forEach((el) => {
+            el.style.color = colors.lightFont1;
+        });
     } else {
         document.querySelector("body").style.backgroundColor = colors.darkBg1;
         document.querySelector("body").style.color = colors.darkFont1;
+        document.querySelectorAll(".nav-link").forEach((el) => {
+            el.style.color = colors.darkFont1;
+        });
     }
 }
 
@@ -61,15 +67,14 @@ function scrollEffects() {
             if (posY <= window.scrollY && posYEnd >= window.scrollY) {
                 return true;
             } else {
-                console.log({ posY, posYEnd });
                 return false;
             }
         });
 
         if (shouldLight) {
-            changeTheme("light")
+            changeTheme("light");
         } else {
-            changeTheme("dark")
+            changeTheme("dark");
         }
     });
 }

@@ -69,11 +69,11 @@ nav {
     top: 50%;
     left: calc((100% - 100rem) / 4);
     transform: translate(-50%, -50%);
+}
 
-    a {
-        text-decoration: none;
-        color: var(--light-font-1);
-    }
+.nav-link {
+    text-decoration: none;
+    color: var(--light-font-1);
 }
 
 h1 {
