@@ -274,7 +274,9 @@ function main() {
             clickedNavLinkEl = document.getElementById(`${clickedNavLink}-link`);
         }
 
-        if (lightGroup.some((el) => (currentPosition.name === el ? true : false))) {
+        if (
+            lightGroup.some((el) => (currentPosition && currentPosition.name === el ? true : false))
+        ) {
             changeTheme("light");
             changeLinkTheme(
                 "light",
