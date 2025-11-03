@@ -32,14 +32,7 @@ const colors = {
     lightHighlight3: "#cecacd",
 };
 
-function snapToNextSection(section) {
-    const sections = {
-        home: "#home",
-        about: "#about-me",
-        tech: "#tech-stack",
-        project: "#projects",
-    };
-
+function snapToNextSection(sections, section) {
     window.location.href = sections[section];
 }
 
@@ -85,7 +78,14 @@ function getCurrentPosition(positionY) {
     }
 }
 
-function scrollEffects() {
+function main() {
+    const sections = {
+        home: "#home",
+        about: "#about-me",
+        tech: "#tech-stack",
+        project: "#projects",
+    };
+
     const sectionContainer = {
         home: document.querySelector(".home-container"),
         about: document.querySelector(".about-me-container"),
@@ -112,26 +112,40 @@ function scrollEffects() {
         },
     };
 
+    let skipSnap = false;
+    let clickedLink = "home";
+    const navLink = document.querySelectorAll(".nav-link");
+    navLink.forEach((element) => {
+        element.addEventListener("click", () => {
+            skipSnap = true;
+            clickedLink = element.getAttribute("href");
+        });
+    });
+
     const lightGroup = ["home", "tech"];
     let currentPosition = getCurrentPosition(positionY);
     let lastSection = currentPosition.name;
 
     document.addEventListener("scroll", () => {
         currentPosition = getCurrentPosition(positionY);
+        const keyClickedLink =
+            Object.keys(sections).find((el) => sections[el] === clickedLink) || "home";
 
-        if (currentPosition.name !== lastSection) {
-            lastSection = currentPosition.name;
-            snapToNextSection(lastSection);
+        if (skipSnap) {
+            if (currentPosition.name === keyClickedLink) {
+                skipSnap = false;
+            }
+        } else {
+            if (currentPosition.name !== lastSection) {
+                lastSection = currentPosition.name;
+                snapToNextSection(sections, lastSection);
+            }
+
+            lightGroup.some((el) => (currentPosition.name === el ? true : false))
+                ? changeTheme("light")
+                : changeTheme("dark");
         }
-
-        lightGroup.some((el) => (currentPosition.name === el ? true : false))
-            ? changeTheme("light")
-            : changeTheme("dark");
     });
-}
-
-function main() {
-    scrollEffects();
 }
 
 document.addEventListener("DOMContentLoaded", () => {
