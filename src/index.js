@@ -36,6 +36,28 @@ function snapToNextSection(sections, section) {
     window.location.href = sections[section];
 }
 
+function changeLinkTheme(theme, prevClickedNavLinkEl, clickedNavLinkEl) {
+    if (theme === "light") {
+        if (prevClickedNavLinkEl) {
+            prevClickedNavLinkEl.style.backgroundColor = null;
+            prevClickedNavLinkEl.style.color = colors.lightFont1;
+        }
+        if (clickedNavLinkEl) {
+            clickedNavLinkEl.style.backgroundColor = colors.lightRose;
+            clickedNavLinkEl.style.color = colors.lightHighlight1;
+        }
+    } else {
+        if (prevClickedNavLinkEl) {
+            prevClickedNavLinkEl.style.backgroundColor = null;
+            prevClickedNavLinkEl.style.color = colors.darkFont1;
+        }
+        if (clickedNavLinkEl) {
+            clickedNavLinkEl.style.backgroundColor = colors.darkRose;
+            clickedNavLinkEl.style.color = colors.darkHighlight1;
+        }
+    }
+}
+
 function changeTheme(theme) {
     if (theme === "light") {
         document.querySelector("body").style.backgroundColor = colors.lightBg1;
@@ -112,38 +134,56 @@ function main() {
         },
     };
 
+    let currentPosition = getCurrentPosition(positionY);
+
     let skipSnap = false;
-    let clickedLink = "home";
-    const navLink = document.querySelectorAll(".nav-link");
-    navLink.forEach((element) => {
+    let clickedNavLink = currentPosition.name;
+    let clickedNavLinkEl = document.getElementById(`${clickedNavLink}-link`);
+    let prevClickedNavLinkEl = null;
+    const navLinks = document.querySelectorAll(".nav-link");
+
+    navLinks.forEach((element) => {
         element.addEventListener("click", () => {
             skipSnap = true;
-            clickedLink = element.getAttribute("href");
+            clickedNavLink =
+                Object.keys(sections).find((el) => sections[el] === element.getAttribute("href")) ||
+                "home";
         });
     });
 
+    if (window.scrollY === 0) {
+        changeTheme("light");
+        changeLinkTheme("light", prevClickedNavLinkEl, clickedNavLinkEl);
+    }
+
     const lightGroup = ["home", "tech"];
-    let currentPosition = getCurrentPosition(positionY);
     let lastSection = currentPosition.name;
 
     document.addEventListener("scroll", () => {
         currentPosition = getCurrentPosition(positionY);
-        const keyClickedLink =
-            Object.keys(sections).find((el) => sections[el] === clickedLink) || "home";
 
         if (skipSnap) {
-            if (currentPosition.name === keyClickedLink) {
+            if (currentPosition.name === clickedNavLink) {
                 skipSnap = false;
             }
-        } else {
-            if (currentPosition.name !== lastSection) {
-                lastSection = currentPosition.name;
-                snapToNextSection(sections, lastSection);
-            }
+            return;
+        }
 
-            lightGroup.some((el) => (currentPosition.name === el ? true : false))
-                ? changeTheme("light")
-                : changeTheme("dark");
+        if (currentPosition.name !== lastSection) {
+            lastSection = currentPosition.name;
+            snapToNextSection(sections, lastSection);
+
+            clickedNavLink = currentPosition.name;
+            prevClickedNavLinkEl = clickedNavLinkEl;
+            clickedNavLinkEl = document.getElementById(`${clickedNavLink}-link`);
+        }
+
+        if (lightGroup.some((el) => (currentPosition.name === el ? true : false))) {
+            changeTheme("light");
+            changeLinkTheme("light", prevClickedNavLinkEl, clickedNavLinkEl);
+        } else {
+            changeTheme("dark");
+            changeLinkTheme("dark", prevClickedNavLinkEl, clickedNavLinkEl);
         }
     });
 }

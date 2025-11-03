@@ -67,7 +67,7 @@ nav {
     display: flex;
     flex-direction: column;
     position: fixed;
-    gap: 3rem;
+    gap: 2.5rem;
 
     top: 50%;
     left: calc((100% - 100rem) / 4);
@@ -78,6 +78,8 @@ nav {
     text-decoration: none;
     color: var(--light-font-1);
     font-weight: 600;
+    padding: 0.5rem 1.5rem;
+    border-radius: 1rem;
 }
 
 h1 {
