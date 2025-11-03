@@ -1,0 +1,29 @@
+/index.html
+  Cache-Control: no-cache
+
+/*.html
+  Cache-Control: no-cache
+
+# ----------------------------------------------------
+#                     PRODUCTION 
+# ----------------------------------------------------
+# /*.js
+#   Cache-Control: public, max-age=31536000, immutable
+# 
+# /*.css
+#   Cache-Control: public, max-age=31536000, immutable
+# 
+# /assets/*
+#   Cache-Control: public, max-age=31536000, immutable
+
+# ----------------------------------------------------
+#                     DEVELOPMENT 
+# ----------------------------------------------------
+/*.js
+  Cache-Control: no-cache
+
+/*.css
+  Cache-Control: no-cache
+
+/assets/*
+  Cache-Control: no-cache
