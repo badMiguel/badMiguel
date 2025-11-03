@@ -44,7 +44,7 @@ function snapToNextSection(sections, lastSection, currentSection, currentPositio
     if (currHeight > prevHeight) {
         window.location.href = sections[currentSection];
     } else {
-        window.scrollTo({ top: currentPosition.end - window.innerHeight / 3 });
+        window.scrollTo({ top: currentPosition.end - window.innerHeight * (4 / 11) });
     }
 }
 
@@ -150,6 +150,7 @@ function getCurrentPosition(positionY) {
             return { name: pos, pos: positionY[pos] };
         }
     }
+    return { name: "home", pos: positionY["home"] };
 }
 
 function main() {
@@ -260,7 +261,7 @@ function main() {
             return;
         }
 
-        if (currentPosition && currentPosition.name !== lastSection) {
+        if (currentPosition.name !== lastSection) {
             snapToNextSection(
                 sections,
                 lastSection,
@@ -274,9 +275,7 @@ function main() {
             clickedNavLinkEl = document.getElementById(`${clickedNavLink}-link`);
         }
 
-        if (
-            lightGroup.some((el) => (currentPosition && currentPosition.name === el ? true : false))
-        ) {
+        if (lightGroup.some((el) => (currentPosition.name === el ? true : false))) {
             changeTheme("light");
             changeLinkTheme(
                 "light",
