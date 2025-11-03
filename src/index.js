@@ -49,33 +49,63 @@ function changeTheme(theme) {
 }
 
 function getElementAbsoluteYPosition(element) {
-    return document.querySelector(element).getBoundingClientRect().top + window.scrollY;
+    return element.getBoundingClientRect().top + window.scrollY;
 }
 
 function getElementHeight(element) {
-    return document.querySelector(element).clientHeight;
+    return element.clientHeight;
+}
+
+function getStartPos(element) {
+    return getElementAbsoluteYPosition(element) - window.innerHeight / 2;
+}
+
+function getEndPos(element) {
+    return (
+        getElementAbsoluteYPosition(element) - window.innerHeight / 2 + getElementHeight(element)
+    );
 }
 
 function scrollEffects() {
-    const lightGroup = [".home-container", ".tech-stack-container"];
+    const sections = {
+        home: document.querySelector(".home-container"),
+        about: document.querySelector(".about-me-container"),
+        tech: document.querySelector(".tech-stack-container"),
+        project: document.querySelector(".projects-container"),
+    };
+
+    console.log(sections.home);
+    const pos = {
+        home: {
+            start: getStartPos(sections.home),
+            end: getEndPos(sections.home),
+        },
+        about: {
+            start: getStartPos(sections.about),
+            end: getEndPos(sections.about),
+        },
+        tech: {
+            start: getStartPos(sections.tech),
+            end: getEndPos(sections.tech),
+        },
+        project: {
+            start: getStartPos(sections.project),
+            end: getEndPos(sections.project),
+        },
+    };
+
+    const lightGroup = [pos.home, pos.tech];
 
     document.addEventListener("scroll", () => {
-        const shouldLight = lightGroup.some((el) => {
-            const posY = getElementAbsoluteYPosition(el) - window.innerHeight / 2;
-            const posYEnd = posY + getElementHeight(el);
-
-            if (posY <= window.scrollY && posYEnd >= window.scrollY) {
+        lightGroup.some((el) => {
+            if (el.start <= window.scrollY && el.end >= window.scrollY) {
                 return true;
             } else {
                 return false;
             }
-        });
-
-        if (shouldLight) {
-            changeTheme("light");
-        } else {
-            changeTheme("dark");
-        }
+        })
+            ? changeTheme("light")
+            : changeTheme("dark");
     });
 }
 
