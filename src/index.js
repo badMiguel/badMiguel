@@ -331,6 +331,86 @@ function main() {
     });
 }
 
+// Debug mode (only runs with ?debug)
+function debugMode() {
+    const overlay = document.createElement("pre");
+    overlay.id = "debug-overlay";
+    Object.assign(overlay.style, {
+        position: "fixed",
+        right: "12px",
+        bottom: "12px",
+        zIndex: 99999,
+        background: "rgba(0,0,0,0.85)",
+        color: "#fff",
+        padding: "10px",
+        borderRadius: "8px",
+        maxWidth: "420px",
+        maxHeight: "50vh",
+        overflow: "auto",
+        fontSize: "12px",
+        whiteSpace: "pre-wrap",
+        lineHeight: "1.25",
+    });
+    overlay.textContent = "Debug mode — collecting info...\n";
+    document.documentElement.appendChild(overlay);
+
+    function appendLine(line) {
+        overlay.textContent += line + "\n";
+        overlay.scrollTop = overlay.scrollHeight;
+    }
+
+    const env = {
+        userAgent: navigator.userAgent,
+        platform: navigator.platform,
+        reducedMotion: !!(
+            window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches
+        ),
+        raf: !!window.requestAnimationFrame,
+        cssAnimation:
+            typeof document.body !== "undefined"
+                ? "animation" in document.body.style || "webkitAnimation" in document.body.style
+                : false,
+    };
+
+    try {
+        new Function("return 1")();
+        env.evalAllowed = true;
+    } catch (e) {
+        env.evalAllowed = false;
+        env.evalError = e && e.message;
+    }
+
+    appendLine("ENV: " + JSON.stringify(env));
+
+    window.addEventListener("error", (e) => {
+        appendLine(`Error: ${e.message} @ ${e.filename || ""}:${e.lineno || ""}:${e.colno || ""}`);
+        if (e.error && e.error.stack) appendLine("Stack: " + e.error.stack);
+    });
+
+    window.addEventListener("unhandledrejection", (ev) => {
+        const reason = ev.reason && (ev.reason.stack || ev.reason.message || String(ev.reason));
+        appendLine("UnhandledRejection: " + reason);
+    });
+
+    try {
+        main();
+    } catch (err) {
+        appendLine("main() threw: " + (err && (err.stack || err.message || String(err))));
+    }
+}
+
 window.addEventListener("load", () => {
-    main();
+    const url = new URL(window.location.href);
+    const debugOn = url.searchParams.has("debug"); // use ?debug or ?debug=1
+
+    if (!debugOn) {
+        try {
+            main();
+        } catch (err) {
+            console.error(err);
+        }
+        return;
+    }
+
+    debugMode();
 });
