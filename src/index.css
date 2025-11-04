@@ -119,8 +119,10 @@ nav {
 .nav-link {
     text-decoration: none;
     font-weight: 500;
-    padding: 0.5rem 3rem 0.5rem 1.5rem;
+    padding: 0.5rem 1.5rem 0.5rem 3rem;
     border-radius: 1rem;
+    text-align: right;
+    transition: background-color 0.2s ease;
 }
 
 h1 {
@@ -269,7 +271,9 @@ p {
     text-align: center;
     color: var(--dark-highlight-1);
     font-size: 1.8rem;
-    transition: background-color 0.15s ease, color 0.15s ease;
+    transition:
+        background-color 0.15s ease,
+        color 0.15s ease;
 }
 
 .demo-link {
