@@ -215,8 +215,12 @@ p {
     }
 }
 
-.tech-stack-content-item-container:hover {
+.tech-item-hover-light {
     background-color: var(--light-highlight-1);
+}
+
+.tech-item-hover-dark {
+    background-color: var(--dark-highlight-1);
 }
 
 .technology-logo {
@@ -241,7 +245,11 @@ p {
     }
 }
 
-.project-content-item-container:hover {
+.project-item-hover-light {
+    background-color: var(--light-bg-2);
+}
+
+.project-item-hover-dark {
     background-color: var(--dark-bg-2);
 }
 

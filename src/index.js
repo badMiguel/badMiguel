@@ -245,6 +245,32 @@ function main() {
         });
     });
 
+    document.querySelectorAll(".tech-stack-content-item-container").forEach((element) => {
+        element.addEventListener("mouseover", () => {
+            lightGroup.some((el) => (currentPosition.name === el ? true : false))
+                ? element.classList.add("tech-item-hover-light")
+                : element.classList.add("tech-item-hover-dark");
+        });
+
+        element.addEventListener("mouseout", () => {
+            element.classList.remove("tech-item-hover-light");
+            element.classList.remove("tech-item-hover-dark");
+        });
+    });
+
+    document.querySelectorAll(".project-content-item-container").forEach((element) => {
+        element.addEventListener("mouseover", () => {
+            lightGroup.some((el) => (currentPosition.name === el ? true : false))
+                ? element.classList.add("project-item-hover-light")
+                : element.classList.add("project-item-hover-dark");
+        });
+
+        element.addEventListener("mouseout", () => {
+            element.classList.remove("project-item-hover-light");
+            element.classList.remove("project-item-hover-dark");
+        });
+    });
+
     if (window.scrollY === 0) {
         changeTheme("light");
         changeLinkTheme("light", prevClickedNavLinkEl, clickedNavLinkEl);
