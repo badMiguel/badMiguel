@@ -153,27 +153,8 @@ function getCurrentPosition(positionY) {
     return { name: "home", pos: positionY["home"] };
 }
 
-function main() {
-    document.getElementById("copyright-year").textContent = new Date().getFullYear();
-
-    const lightGroup = ["home", "tech", "contact"];
-    const sections = {
-        home: "#home",
-        about: "#about-me",
-        tech: "#tech-stack",
-        project: "#projects",
-        contact: "#contact",
-    };
-
-    const sectionContainer = {
-        home: document.querySelector(".home-container"),
-        about: document.querySelector(".about-me-container"),
-        tech: document.querySelector(".tech-stack-container"),
-        project: document.querySelector(".projects-container"),
-        contact: document.querySelector(".contact-container"),
-    };
-
-    const positionY = {
+function getPositionY(sectionContainer) {
+    return {
         home: {
             start: getStartPos(sectionContainer.home),
             end: getEndPos(sectionContainer.home),
@@ -195,6 +176,33 @@ function main() {
             end: getEndPos(sectionContainer.contact),
         },
     };
+}
+
+function main() {
+    document.getElementById("copyright-year").textContent = new Date().getFullYear();
+
+    const lightGroup = ["home", "tech", "contact"];
+    const sections = {
+        home: "#home",
+        about: "#about-me",
+        tech: "#tech-stack",
+        project: "#projects",
+        contact: "#contact",
+    };
+
+    const sectionContainer = {
+        home: document.querySelector(".home-container"),
+        about: document.querySelector(".about-me-container"),
+        tech: document.querySelector(".tech-stack-container"),
+        project: document.querySelector(".projects-container"),
+        contact: document.querySelector(".contact-container"),
+    };
+
+    let positionY = getPositionY(sectionContainer);
+
+    window.addEventListener("resize", () => {
+        positionY = getPositionY(sectionContainer);
+    });
 
     let currentPosition = getCurrentPosition(positionY);
     let skipSnap = false;
