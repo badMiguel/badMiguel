@@ -32,30 +32,6 @@ const colors = {
     lightHighlight3: "#cecacd",
 };
 
-function snapToNextSection(
-    sections,
-    sectionContainer,
-    lastSection,
-    currentSection,
-    currentPosition,
-    positionY
-) {
-    if (currentPosition.end - currentPosition.start <= window.innerHeight) {
-        window.location.href = sections[currentSection];
-        return;
-    }
-
-    const currHeight = positionY[currentSection].start;
-    const prevHeight = positionY[lastSection].start;
-
-    if (currHeight > prevHeight) {
-        window.location.href = sections[currentSection];
-    } else {
-        sectionContainer[currentSection].scrollIntoView({ behaviour: "smooth", block: "end" });
-        history.pushState(null, "", `#${currentSection}`);
-    }
-}
-
 function changeLinkTheme(
     theme,
     prevClickedNavLinkEl,
@@ -208,7 +184,6 @@ function main(logger) {
     });
 
     let currentPosition = getCurrentPosition(positionY);
-    let skipSnap = false;
     let clickedNavLink = currentPosition.name;
     let clickedNavLinkEl = document.getElementById(`${clickedNavLink}-link`);
     let prevClickedNavLinkEl = clickedNavLinkEl;
@@ -241,7 +216,6 @@ function main(logger) {
             element.classList.remove("dark-hover-link");
             element.classList.remove("light-hover-link");
 
-            skipSnap = true;
             clickedNavLink =
                 Object.keys(sections).find((el) => sections[el] === element.getAttribute("href")) ||
                 "home";
@@ -306,25 +280,7 @@ function main(logger) {
     document.addEventListener("scroll", () => {
         currentPosition = getCurrentPosition(positionY);
 
-        if (skipSnap) {
-            if (currentPosition.name === clickedNavLink) {
-                skipSnap = false;
-            }
-            return;
-        }
-
         if (currentPosition.name !== lastSection) {
-            if (!isReduceMotion) {
-                snapToNextSection(
-                    sections,
-                    sectionContainer,
-                    lastSection,
-                    currentPosition.name,
-                    currentPosition.pos,
-                    positionY
-                );
-            }
-
             lastSection = currentPosition.name;
             clickedNavLink = currentPosition.name;
             prevClickedNavLinkEl = clickedNavLinkEl;
