@@ -213,10 +213,6 @@ function main(logger) {
     let hoveredElement = { name: "", element: null };
     const navLinks = document.querySelectorAll(".nav-link");
 
-    if (logger) {
-        logger.appendLine(`Start Position: ${currentPosition.name}`);
-    }
-
     navLinks.forEach((element) => {
         element.addEventListener("mouseover", () => {
             if (currentPosition.name === element.id.split("-")[0]) {
@@ -251,14 +247,8 @@ function main(logger) {
             clickedNavLinkEl = document.getElementById(`${clickedNavLink}-link`);
 
             if (isReduceMotion) {
-                if (logger) {
-                    logger.appendLine(`Before click position: ${currentPosition.name}`);
-                }
                 const clicked = element.id.split("-")[0];
                 currentPosition = { name: clicked, pos: positionY[clicked] };
-                if (logger) {
-                    logger.appendLine(`After click position: ${currentPosition.name}`);
-                }
             }
 
             if (lightGroup.some((el) => (currentPosition.name === el ? true : false))) {
@@ -318,10 +308,6 @@ function main(logger) {
         }
 
         if (currentPosition.name !== lastSection) {
-            if (logger) {
-                logger.appendLine(`section changed ${currentPosition.name}`);
-            }
-
             snapToNextSection(
                 sections,
                 lastSection,
