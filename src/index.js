@@ -423,20 +423,20 @@ class DebugLogger {
 
 window.addEventListener("load", () => {
     const url = new URL(window.location.href);
-    const debugOn = url.searchParams.has("debug");
     let logger = null;
 
-    if (debugOn) {
-        logger = new DebugLogger();
-    }
-
-    try {
+    if (!url.searchParams.has("debug")) {
         main(logger);
-    } catch (err) {
-        if (logger) {
-            logger.appendLine("main() threw: " + (err && (err.stack || err.message)));
-        } else {
-            console.error(err);
+    } else {
+        logger = new DebugLogger();
+        try {
+            main(logger);
+        } catch (err) {
+            if (logger) {
+                logger.appendLine("main() threw: " + (err && (err.stack || err.message)));
+            } else {
+                console.error(err);
+            }
         }
     }
 });
