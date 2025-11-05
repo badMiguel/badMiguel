@@ -308,13 +308,16 @@ function main(logger) {
         }
 
         if (currentPosition.name !== lastSection) {
-            snapToNextSection(
-                sections,
-                lastSection,
-                currentPosition.name,
-                currentPosition.pos,
-                positionY
-            );
+            if (!isReduceMotion) {
+                snapToNextSection(
+                    sections,
+                    lastSection,
+                    currentPosition.name,
+                    currentPosition.pos,
+                    positionY
+                );
+            }
+
             lastSection = currentPosition.name;
             clickedNavLink = currentPosition.name;
             prevClickedNavLinkEl = clickedNavLinkEl;
