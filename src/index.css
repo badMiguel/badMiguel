@@ -140,8 +140,7 @@ p {
 .home-container,
 .about-me-container,
 .tech-stack-container,
-.projects-container,
-.contact-container {
+.projects-container {
     min-height: 100vh;
     display: flex;
     flex-direction: column;
@@ -161,8 +160,7 @@ p {
 .home-container-spacing,
 .about-me-container-spacing,
 .tech-stack-container-spacing,
-.projects-container-spacing,
-.contact-container-spacing {
+.projects-container-spacing {
     width: 70%;
     max-width: 80rem;
     margin: auto;

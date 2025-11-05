@@ -171,10 +171,6 @@ function getPositionY(sectionContainer) {
             start: getStartPos(sectionContainer.project),
             end: getEndPos(sectionContainer.project),
         },
-        contact: {
-            start: getStartPos(sectionContainer.contact),
-            end: getEndPos(sectionContainer.contact),
-        },
     };
 }
 
@@ -182,13 +178,12 @@ function main(logger) {
     document.getElementById("copyright-year").textContent = new Date().getFullYear();
     const isReduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-    const lightGroup = ["home", "tech", "contact"];
+    const lightGroup = ["home", "tech"];
     const sections = {
         home: "#home",
         about: "#about-me",
         tech: "#tech-stack",
         project: "#projects",
-        contact: "#contact",
     };
 
     const sectionContainer = {
@@ -196,7 +191,6 @@ function main(logger) {
         about: document.querySelector(".about-me-container"),
         tech: document.querySelector(".tech-stack-container"),
         project: document.querySelector(".projects-container"),
-        contact: document.querySelector(".contact-container"),
     };
 
     let positionY = getPositionY(sectionContainer);
