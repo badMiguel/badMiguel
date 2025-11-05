@@ -180,6 +180,7 @@ function getPositionY(sectionContainer) {
 
 function main(logger) {
     document.getElementById("copyright-year").textContent = new Date().getFullYear();
+    const isReduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
     const lightGroup = ["home", "tech", "contact"];
     const sections = {
@@ -212,7 +213,10 @@ function main(logger) {
     let hoveredElement = { name: "", element: null };
     const navLinks = document.querySelectorAll(".nav-link");
 
-    logger.appendLine(`Start Position: ${currentPosition.name}`);
+    if (logger) {
+        logger.appendLine(`Start Position: ${currentPosition.name}`);
+    }
+
     navLinks.forEach((element) => {
         element.addEventListener("mouseover", () => {
             if (currentPosition.name === element.id.split("-")[0]) {
@@ -246,9 +250,26 @@ function main(logger) {
             prevClickedNavLinkEl = clickedNavLinkEl;
             clickedNavLinkEl = document.getElementById(`${clickedNavLink}-link`);
 
+            if (isReduceMotion) {
+                if (logger) {
+                    logger.appendLine(`Before click position: ${currentPosition.name}`);
+                }
+                const clicked = element.id.split("-")[0];
+                currentPosition = { name: clicked, pos: positionY[clicked] };
+                if (logger) {
+                    logger.appendLine(`After click position: ${currentPosition.name}`);
+                }
+            }
+
             if (lightGroup.some((el) => (currentPosition.name === el ? true : false))) {
+                if (isReduceMotion) {
+                    changeTheme("light");
+                }
                 changeLinkTheme("light", prevClickedNavLinkEl, clickedNavLinkEl);
             } else {
+                if (isReduceMotion) {
+                    changeTheme("dark");
+                }
                 changeLinkTheme("dark", prevClickedNavLinkEl, clickedNavLinkEl);
             }
         });
@@ -297,7 +318,10 @@ function main(logger) {
         }
 
         if (currentPosition.name !== lastSection) {
-            logger.appendLine(`section changed ${currentPosition.name}`);
+            if (logger) {
+                logger.appendLine(`section changed ${currentPosition.name}`);
+            }
+
             snapToNextSection(
                 sections,
                 lastSection,
@@ -414,7 +438,6 @@ class DebugLogger {
 window.addEventListener("load", () => {
     const url = new URL(window.location.href);
     const debugOn = url.searchParams.has("debug");
-
     let logger = null;
 
     if (debugOn) {
