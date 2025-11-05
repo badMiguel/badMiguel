@@ -32,7 +32,14 @@ const colors = {
     lightHighlight3: "#cecacd",
 };
 
-function snapToNextSection(sections, lastSection, currentSection, currentPosition, positionY) {
+function snapToNextSection(
+    sections,
+    sectionContainer,
+    lastSection,
+    currentSection,
+    currentPosition,
+    positionY
+) {
     if (currentPosition.end - currentPosition.start <= window.innerHeight) {
         window.location.href = sections[currentSection];
         return;
@@ -44,7 +51,8 @@ function snapToNextSection(sections, lastSection, currentSection, currentPositio
     if (currHeight > prevHeight) {
         window.location.href = sections[currentSection];
     } else {
-        window.scrollTo({ top: currentPosition.end - window.innerHeight * (4 / 11) });
+        sectionContainer[currentSection].scrollIntoView({ behaviour: "smooth", block: "end" });
+        history.pushState(null, "", `#${currentSection}`);
     }
 }
 
@@ -288,8 +296,7 @@ function main(logger) {
     if (lightGroup.some((el) => (currentPosition.name === el ? true : false))) {
         changeTheme("light");
         changeLinkTheme("light", prevClickedNavLinkEl, clickedNavLinkEl);
-    }
-    else {
+    } else {
         changeTheme("dark");
         changeLinkTheme("dark", prevClickedNavLinkEl, clickedNavLinkEl);
     }
@@ -310,6 +317,7 @@ function main(logger) {
             if (!isReduceMotion) {
                 snapToNextSection(
                     sections,
+                    sectionContainer,
                     lastSection,
                     currentPosition.name,
                     currentPosition.pos,
