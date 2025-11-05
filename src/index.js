@@ -285,10 +285,15 @@ function main(logger) {
         });
     });
 
-    if (window.scrollY === 0) {
+    if (lightGroup.some((el) => (currentPosition.name === el ? true : false))) {
         changeTheme("light");
         changeLinkTheme("light", prevClickedNavLinkEl, clickedNavLinkEl);
     }
+    else {
+        changeTheme("dark");
+        changeLinkTheme("dark", prevClickedNavLinkEl, clickedNavLinkEl);
+    }
+
     let lastSection = currentPosition.name;
 
     document.addEventListener("scroll", () => {
