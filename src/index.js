@@ -178,7 +178,7 @@ function getPositionY(sectionContainer) {
     };
 }
 
-function main() {
+function main(logger) {
     document.getElementById("copyright-year").textContent = new Date().getFullYear();
 
     const lightGroup = ["home", "tech", "contact"];
@@ -212,6 +212,7 @@ function main() {
     let hoveredElement = { name: "", element: null };
     const navLinks = document.querySelectorAll(".nav-link");
 
+    logger.appendLine(`Start Position: ${currentPosition.name}`);
     navLinks.forEach((element) => {
         element.addEventListener("mouseover", () => {
             if (currentPosition.name === element.id.split("-")[0]) {
@@ -296,6 +297,7 @@ function main() {
         }
 
         if (currentPosition.name !== lastSection) {
+            logger.appendLine(`section changed ${currentPosition.name}`);
             snapToNextSection(
                 sections,
                 lastSection,
@@ -331,86 +333,101 @@ function main() {
     });
 }
 
-// Debug mode (only runs with ?debug)
-function debugMode() {
-    const overlay = document.createElement("pre");
-    overlay.id = "debug-overlay";
-    Object.assign(overlay.style, {
-        position: "fixed",
-        right: "12px",
-        bottom: "12px",
-        zIndex: 99999,
-        background: "rgba(0,0,0,0.85)",
-        color: "#fff",
-        padding: "10px",
-        borderRadius: "8px",
-        maxWidth: "420px",
-        maxHeight: "50vh",
-        overflow: "auto",
-        fontSize: "12px",
-        whiteSpace: "pre-wrap",
-        lineHeight: "1.25",
-    });
-    overlay.textContent = "Debug mode — collecting info...\n";
-    document.documentElement.appendChild(overlay);
+class DebugLogger {
+    constructor() {
+        this.overlay = document.createElement("pre");
+        this.overlay.id = "debug-overlay";
+        Object.assign(this.overlay.style, {
+            position: "fixed",
+            right: "12px",
+            bottom: "12px",
+            zIndex: 99999,
+            background: "rgba(0,0,0,0.85)",
+            color: "#fff",
+            padding: "10px",
+            borderRadius: "8px",
+            maxWidth: "420px",
+            maxHeight: "50vh",
+            overflow: "auto",
+            fontSize: "12px",
+            whiteSpace: "pre-wrap",
+            lineHeight: "1.25",
+        });
+        this.overlay.textContent = "Debug mode — collecting info...\n";
+        document.documentElement.appendChild(this.overlay);
 
-    function appendLine(line) {
-        overlay.textContent += line + "\n";
-        overlay.scrollTop = overlay.scrollHeight;
+        const env = {
+            userAgent: navigator.userAgent,
+            platform: navigator.platform,
+            reducedMotion: !!(
+                window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches
+            ),
+            raf: !!window.requestAnimationFrame,
+            cssAnimation:
+                typeof document.body !== "undefined"
+                    ? "animation" in document.body.style || "webkitAnimation" in document.body.style
+                    : false,
+        };
+
+        try {
+            new Function("return 1")();
+            env.evalAllowed = true;
+        } catch (e) {
+            env.evalAllowed = false;
+            env.evalError = e && e.message;
+        }
+
+        this.appendLine("ENV: " + JSON.stringify(env));
+
+        window.addEventListener("error", (e) => {
+            this.appendLine(
+                `Error: ${e.message} @ ${e.filename || ""}:${e.lineno || ""}:${e.colno || ""}`
+            );
+            if (e.error && e.error.stack) this.appendLine("Stack: " + e.error.stack);
+        });
+
+        window.addEventListener("unhandledrejection", (ev) => {
+            const reason = ev.reason && (ev.reason.stack || ev.reason.message || String(ev.reason));
+            this.appendLine("UnhandledRejection: " + reason);
+        });
+
+        this.hb = setInterval(
+            () =>
+                this.appendLine(
+                    "heartbeat: " + new Date().toISOString() + " scrollY:" + window.scrollY
+                ),
+            20000
+        );
     }
 
-    const env = {
-        userAgent: navigator.userAgent,
-        platform: navigator.platform,
-        reducedMotion: !!(
-            window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches
-        ),
-        raf: !!window.requestAnimationFrame,
-        cssAnimation:
-            typeof document.body !== "undefined"
-                ? "animation" in document.body.style || "webkitAnimation" in document.body.style
-                : false,
-    };
-
-    try {
-        new Function("return 1")();
-        env.evalAllowed = true;
-    } catch (e) {
-        env.evalAllowed = false;
-        env.evalError = e && e.message;
+    appendLine(line) {
+        this.overlay.textContent += line + "\n";
+        this.overlay.scrollTop = this.overlay.scrollHeight;
     }
 
-    appendLine("ENV: " + JSON.stringify(env));
-
-    window.addEventListener("error", (e) => {
-        appendLine(`Error: ${e.message} @ ${e.filename || ""}:${e.lineno || ""}:${e.colno || ""}`);
-        if (e.error && e.error.stack) appendLine("Stack: " + e.error.stack);
-    });
-
-    window.addEventListener("unhandledrejection", (ev) => {
-        const reason = ev.reason && (ev.reason.stack || ev.reason.message || String(ev.reason));
-        appendLine("UnhandledRejection: " + reason);
-    });
-
-    try {
-        main();
-    } catch (err) {
-        appendLine("main() threw: " + (err && (err.stack || err.message || String(err))));
+    destroy() {
+        clearInterval(this.hb);
+        this.overlay.remove();
     }
 }
 
 window.addEventListener("load", () => {
     const url = new URL(window.location.href);
-    const debugOn = url.searchParams.has("debug"); // use ?debug or ?debug=1
+    const debugOn = url.searchParams.has("debug");
 
-    if (!debugOn) {
-        try {
-            main();
-        } catch (err) {
-            console.error(err);
-        }
-        return;
+    let logger = null;
+
+    if (debugOn) {
+        logger = new DebugLogger();
     }
 
-    debugMode();
+    try {
+        main(logger);
+    } catch (err) {
+        if (logger) {
+            logger.appendLine("main() threw: " + (err && (err.stack || err.message)));
+        } else {
+            console.error(err);
+        }
+    }
 });
