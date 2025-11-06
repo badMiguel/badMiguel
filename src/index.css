@@ -7,11 +7,6 @@
     box-sizing: border-box;
 }
 
-html {
-    font-size: 62.5%;
-    scroll-behavior: smooth;
-}
-
 :root {
     --dark-bg-1: #191724;
     --dark-bg-2: #1f1d2e;
@@ -51,6 +46,29 @@ html {
 
     --font-family-header: "Poppins", Arial, Helvetica, sans-serif;
     --font-family-body: "Open Sans", Arial, Helvetica, sans-serif;
+}
+
+html {
+    font-size: 62.5%;
+    scroll-behavior: smooth;
+}
+
+html::-webkit-scrollbar {
+    width: 1rem;
+}
+
+html::-webkit-scrollbar-track {
+    background: var(--dark-bg-1);
+}
+
+html::-webkit-scrollbar-thumb {
+    background-color: var(--dark-gold);
+    border-radius: 0.5rem;
+    border: 0.2rem solid var(--dark-bg-1);
+}
+
+html::-webkit-scrollbar-thumb:hover {
+    background-color: var(--dark-rose);
 }
 
 .light-link-active {
@@ -244,6 +262,7 @@ p {
     width: 100%;
     background-color: var(--dark-iris);
     color: var(--dark-highlight-1);
+
     svg {
         path {
             fill: var(--dark-highlight-1);
@@ -254,6 +273,7 @@ p {
 #resume-link:hover {
     background-color: var(--light-iris);
     color: var(--light-highlight-1);
+
     svg {
         path {
             fill: var(--light-highlight-1);
