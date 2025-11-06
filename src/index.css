@@ -312,6 +312,7 @@ p {
     margin: 0 0 5rem 0;
     padding: 2.5rem 2rem;
     border-radius: 1rem;
+    transition: background-color 0.2s ease;
 
     p {
         font-size: 1.8rem;
