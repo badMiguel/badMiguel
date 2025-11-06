@@ -244,11 +244,21 @@ p {
     width: 100%;
     background-color: var(--dark-iris);
     color: var(--dark-highlight-1);
+    svg {
+        path {
+            fill: var(--dark-highlight-1);
+        }
+    }
 }
 
 #resume-link:hover {
     background-color: var(--light-iris);
     color: var(--light-highlight-1);
+    svg {
+        path {
+            fill: var(--light-highlight-1);
+        }
+    }
 }
 
 .about-me-right-container {
