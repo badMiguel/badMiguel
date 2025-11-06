@@ -99,10 +99,12 @@ function changeTheme(theme) {
                 el.classList.add("dark-hover-link");
             }
         });
+
         document.querySelectorAll(".tech-stack-content-item-container").forEach((el) => {
             el.classList.remove("light-bg-2");
             el.classList.add("dark-bg-2");
         });
+
         document.querySelectorAll(".project-content-item-container").forEach((el) => {
             el.classList.remove("light-bg-3");
             el.classList.add("dark-bg-3");
@@ -158,11 +160,15 @@ function getPositionY(sectionContainer) {
     };
 }
 
+function inLightSection(currentPosition) {
+    const lightGroup = ["home", "tech"];
+    return lightGroup.some((el) => (currentPosition.name === el ? true : false));
+}
+
 function main(logger) {
     document.getElementById("copyright-year").textContent = new Date().getFullYear();
     const isReduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-    const lightGroup = ["home", "tech"];
     const sections = {
         home: "#home",
         about: "#about-me",
@@ -198,7 +204,7 @@ function main(logger) {
 
             hoveredElement = { name: element.id.split("-")[0], element: element };
 
-            if (lightGroup.some((el) => (currentPosition.name === el ? true : false))) {
+            if (inLightSection(currentPosition)) {
                 element.classList.add("light-hover-link");
             } else {
                 element.classList.add("dark-hover-link");
@@ -227,7 +233,7 @@ function main(logger) {
                 currentPosition = { name: clicked, pos: positionY[clicked] };
             }
 
-            if (lightGroup.some((el) => (currentPosition.name === el ? true : false))) {
+            if (inLightSection(currentPosition)) {
                 if (isReduceMotion) {
                     changeTheme("light");
                 }
@@ -243,7 +249,7 @@ function main(logger) {
 
     document.querySelectorAll(".tech-stack-content-item-container").forEach((element) => {
         element.addEventListener("mouseover", () => {
-            lightGroup.some((el) => (currentPosition.name === el ? true : false))
+            inLightSection(currentPosition)
                 ? element.classList.add("tech-item-hover-light")
                 : element.classList.add("tech-item-hover-dark");
         });
@@ -256,7 +262,7 @@ function main(logger) {
 
     document.querySelectorAll(".project-content-item-container").forEach((element) => {
         element.addEventListener("mouseover", () => {
-            lightGroup.some((el) => (currentPosition.name === el ? true : false))
+            inLightSection(currentPosition)
                 ? element.classList.add("project-item-hover-light")
                 : element.classList.add("project-item-hover-dark");
         });
@@ -267,7 +273,7 @@ function main(logger) {
         });
     });
 
-    if (lightGroup.some((el) => (currentPosition.name === el ? true : false))) {
+    if (inLightSection(currentPosition)) {
         changeTheme("light");
         changeLinkTheme("light", prevClickedNavLinkEl, clickedNavLinkEl);
     } else {
@@ -287,7 +293,7 @@ function main(logger) {
             clickedNavLinkEl = document.getElementById(`${clickedNavLink}-link`);
         }
 
-        if (lightGroup.some((el) => (currentPosition.name === el ? true : false))) {
+        if (inLightSection(currentPosition)) {
             changeTheme("light");
             changeLinkTheme(
                 "light",
