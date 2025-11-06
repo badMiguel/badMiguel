@@ -172,8 +172,11 @@ p {
     align-items: center;
 }
 
-.profile-picture-container {
+.about-me-left-container {
     max-width: 30%;
+}
+
+.profile-picture-container {
     aspect-ratio: 1/1;
     overflow: hidden;
     border-radius: 50%;
@@ -185,7 +188,70 @@ p {
     object-fit: cover;
 }
 
-.about-me-content {
+.about-link-container {
+    margin: 2rem 0 0 0;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.about-link {
+    text-decoration: none;
+    padding: 0.5rem 0;
+    border-radius: 1rem;
+    text-align: center;
+    transition:
+        background-color 0.2s ease,
+        color 0.2s ease;
+    font-weight: 500;
+    font-size: 1.8rem;
+    width: 100%;
+
+    svg {
+        height: 2.2rem;
+        width: 2.2rem;
+        transform: translateY(2px);
+    }
+}
+
+#github-link,
+#linkedin-link {
+    width: 48%;
+    background-color: var(--dark-foam);
+
+    svg {
+        path {
+            fill: var(--dark-highlight-1);
+        }
+    }
+}
+
+#github-link:hover,
+#linkedin-link:hover {
+    background-color: var(--light-foam);
+
+    svg {
+        path {
+            fill: var(--light-highlight-1);
+        }
+    }
+}
+
+#resume-link {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    width: 100%;
+    background-color: var(--dark-iris);
+    color: var(--dark-highlight-1);
+}
+
+#resume-link:hover {
+    background-color: var(--light-iris);
+    color: var(--light-highlight-1);
+}
+
+.about-me-right-container {
     width: 60%;
 }
 
