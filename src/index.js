@@ -194,6 +194,7 @@ function main(logger) {
     let clickedNavLinkEl = document.getElementById(`${clickedNavLink}-link`);
     let prevClickedNavLinkEl = clickedNavLinkEl;
     let hoveredElement = { name: "", element: null };
+    let navIsClicked = false;
     const navLinks = document.querySelectorAll(".nav-link");
 
     navLinks.forEach((element) => {
@@ -222,6 +223,7 @@ function main(logger) {
             element.classList.remove("dark-hover-link");
             element.classList.remove("light-hover-link");
 
+            navIsClicked = true;
             clickedNavLink =
                 Object.keys(sections).find((el) => sections[el] === element.getAttribute("href")) ||
                 "home";
@@ -287,6 +289,11 @@ function main(logger) {
         currentPosition = getCurrentPosition(positionY);
 
         if (currentPosition.name !== lastSection) {
+            if (navIsClicked && clickedNavLink !== currentPosition.name) {
+                return;
+            }
+
+            navIsClicked = false;
             lastSection = currentPosition.name;
             clickedNavLink = currentPosition.name;
             prevClickedNavLinkEl = clickedNavLinkEl;
