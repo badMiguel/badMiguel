@@ -32,6 +32,10 @@ const Colors = {
     lightHighlight3: "#cecacd",
 };
 
+function showHover() {
+    return window.innerWidth > 1024;
+}
+
 function changeLinkTheme(
     theme,
     prevClickedNavLinkEl,
@@ -76,7 +80,10 @@ function changeTheme(theme) {
 
             if (el.classList.contains("dark-hover-link")) {
                 el.classList.remove("dark-hover-link");
-                el.classList.add("light-hover-link");
+
+                if (showHover()) {
+                    el.classList.add("light-hover-link");
+                }
             }
         });
         document.querySelectorAll(".tech-stack-content-item-container").forEach((el) => {
@@ -96,7 +103,10 @@ function changeTheme(theme) {
 
             if (el.classList.contains("light-hover-link")) {
                 el.classList.remove("light-hover-link");
-                el.classList.add("dark-hover-link");
+
+                if (showHover()) {
+                    el.classList.add("dark-hover-link");
+                }
             }
         });
 
@@ -205,10 +215,12 @@ function main(logger) {
 
             hoveredElement = { name: element.id.split("-")[0], element: element };
 
-            if (inLightSection(currentPosition)) {
-                element.classList.add("light-hover-link");
-            } else {
-                element.classList.add("dark-hover-link");
+            if (showHover()) {
+                if (inLightSection(currentPosition)) {
+                    element.classList.add("light-hover-link");
+                } else {
+                    element.classList.add("dark-hover-link");
+                }
             }
         });
 
@@ -251,9 +263,11 @@ function main(logger) {
 
     document.querySelectorAll(".tech-stack-content-item-container").forEach((element) => {
         element.addEventListener("mouseover", () => {
-            inLightSection(currentPosition)
-                ? element.classList.add("tech-item-hover-light")
-                : element.classList.add("tech-item-hover-dark");
+            if (showHover()) {
+                inLightSection(currentPosition)
+                    ? element.classList.add("tech-item-hover-light")
+                    : element.classList.add("tech-item-hover-dark");
+            }
         });
 
         element.addEventListener("mouseout", () => {
@@ -264,9 +278,11 @@ function main(logger) {
 
     document.querySelectorAll(".project-content-item-container").forEach((element) => {
         element.addEventListener("mouseover", () => {
-            inLightSection(currentPosition)
-                ? element.classList.add("project-item-hover-light")
-                : element.classList.add("project-item-hover-dark");
+            if (showHover()) {
+                inLightSection(currentPosition)
+                    ? element.classList.add("project-item-hover-light")
+                    : element.classList.add("project-item-hover-dark");
+            }
         });
 
         element.addEventListener("mouseout", () => {
