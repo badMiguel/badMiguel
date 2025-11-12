@@ -367,9 +367,57 @@ p {
     background-color: var(--dark-iris);
 }
 
-@media (min-width: 1400px) {
+@media (min-width: 1500px) {
+    html::-webkit-scrollbar-thumb:hover {
+        background-color: var(--dark-rose);
+    }
+
+    .demo-link:hover {
+        background-color: var(--light-foam);
+        color: var(--light-highlight-1);
+
+        svg,
+        path {
+            fill: var(--light-highlight-1);
+        }
+    }
+
+    #github-link:hover,
+    #linkedin-link:hover {
+        background-color: var(--light-foam);
+
+        svg {
+            path {
+                fill: var(--light-highlight-1);
+            }
+        }
+    }
+
+    #resume-link:hover {
+        background-color: var(--light-iris);
+        color: var(--light-highlight-1);
+
+        svg {
+            path {
+                fill: var(--light-highlight-1);
+            }
+        }
+    }
+
+    .source-link:hover {
+        background-color: var(--light-iris);
+        color: var(--light-highlight-1);
+
+        svg,
+        path {
+            fill: var(--light-highlight-1);
+        }
+    }
+}
+
+@media (min-width: 1300px) and (max-width: 1499px) {
     html {
-        font-size: 62.5%;
+        font-size: 56.25%;
     }
 
     html::-webkit-scrollbar-thumb:hover {
