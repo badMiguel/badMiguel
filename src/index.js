@@ -86,6 +86,9 @@ function changeTheme(theme) {
                 }
             }
         });
+        document.querySelectorAll(".burger-part").forEach((el) => {
+            el.style.backgroundColor = Colors.lightFont1;
+        });
         document.querySelectorAll(".tech-stack-content-item-container").forEach((el) => {
             el.classList.remove("dark-bg-2");
             el.classList.add("light-bg-2");
@@ -108,6 +111,10 @@ function changeTheme(theme) {
                     el.classList.add("dark-hover-link");
                 }
             }
+        });
+
+        document.querySelectorAll(".burger-part").forEach((el) => {
+            el.style.backgroundColor = Colors.darkFont1;
         });
 
         document.querySelectorAll(".tech-stack-content-item-container").forEach((el) => {
@@ -175,7 +182,22 @@ function inLightSection(currentPosition) {
     return lightGroup.some((el) => (currentPosition.name === el ? true : false));
 }
 
+function hamburgerMenu() {
+    const hamburgerIcon = document.querySelector(".hamburger-menu");
+    const topPartBurger = document.querySelector(".burger-top-part");
+    const middlePartBurger = document.querySelector(".burger-middle-part");
+    const bottomPartBurger = document.querySelector(".burger-bottom-part");
+
+    hamburgerIcon.addEventListener("click", function() {
+        topPartBurger.classList.toggle("close");
+        middlePartBurger.classList.toggle("close");
+        bottomPartBurger.classList.toggle("close");
+    });
+}
+
 function main(logger) {
+    hamburgerMenu();
+
     document.getElementById("copyright-year").textContent = new Date().getFullYear();
     const isReduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
