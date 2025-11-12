@@ -367,7 +367,7 @@ p {
     background-color: var(--dark-iris);
 }
 
-@media (min-width: 1500px) {
+@media (min-width: 1400px) {
     html {
         font-size: 62.5%;
     }
@@ -419,7 +419,7 @@ p {
     }
 }
 
-@media (min-width: 800px) and (max-width: 1499px) {
+@media (min-width: 800px) and (max-width: 1399px) {
     html {
         font-size: 56.25%;
     }
@@ -428,6 +428,19 @@ p {
 @media (min-width: 400px) and (max-width: 799px) {
     html {
         font-size: 50%;
+    }
+
+    .about-me-content-container {
+        flex-direction: column;
+        gap: 5rem;
+    }
+
+    .about-me-left-container {
+        max-width: 80%;
+    }
+
+    .about-me-right-container {
+        width: 100%;
     }
 
     .tech-stack-content-item-container {
@@ -447,6 +460,19 @@ p {
 @media (max-width: 399px) {
     html {
         font-size: 43.75%;
+    }
+
+    .about-me-content-container {
+        flex-direction: column;
+        gap: 5rem;
+    }
+
+    .about-me-left-container {
+        max-width: 100%;
+    }
+
+    .about-me-right-container {
+        width: 100%;
     }
 
     .tech-stack-content-item-container {
