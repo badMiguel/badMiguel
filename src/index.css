@@ -141,21 +141,40 @@ body {
     transition: background-color 0.2s ease;
 }
 
+.hamburger-container {
+    position: fixed;
+    top: 2%;
+    left: 3%;
+
+    background-color: var(--light-bg-3);
+    padding: 2rem 3rem 1rem 2rem;
+    border-radius: 1rem;
+
+    display: flex;
+    gap: 2rem;
+}
+
+.hamburger-link-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.hamburger-link {
+    text-decoration: none;
+    margin: 0 0 1rem 0;
+}
+
 .hamburger-menu {
     cursor: pointer;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    gap: 4px;
-
-    position: fixed;
-    top: 95%;
-    left: 3%;
+    gap: 0.4rem;
+    margin: 0.8rem 0 0 0;
 
     .burger-part {
-        width: 19px;
-        height: 2px;
-        border-radius: 20px;
+        width: 2rem;
+        height: 0.2rem;
+        border-radius: 2rem;
         transition: background-color 0.4s ease;
     }
 
@@ -556,6 +575,11 @@ p {
         max-width: 80%;
     }
 
+    .profile-picture-container {
+        width: 80%;
+        margin: auto;
+    }
+
     .about-me-right-container {
         width: 100%;
     }
@@ -590,6 +614,11 @@ p {
 
     .about-me-left-container {
         max-width: 100%;
+    }
+
+    .profile-picture-container {
+        width: 80%;
+        margin: auto;
     }
 
     .about-me-right-container {
