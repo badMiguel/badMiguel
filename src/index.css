@@ -43,6 +43,8 @@
     --font-size-title: 5rem;
     --font-size-header: 3rem;
     --font-size-body: 2rem;
+    --font-size-body-small: 1.8rem;
+    --font-size-body-smaller: 1.6rem;
 
     --font-family-header: "Poppins", Arial, Helvetica, sans-serif;
     --font-family-body: "Open Sans", Arial, Helvetica, sans-serif;
@@ -65,10 +67,6 @@ html::-webkit-scrollbar-thumb {
     background-color: var(--dark-gold);
     border-radius: 0.5rem;
     border: 0.2rem solid var(--dark-bg-1);
-}
-
-html::-webkit-scrollbar-thumb:hover {
-    background-color: var(--dark-rose);
 }
 
 .light-link-active {
@@ -222,7 +220,7 @@ p {
         background-color 0.2s ease,
         color 0.2s ease;
     font-weight: 500;
-    font-size: 1.8rem;
+    font-size: var(--font-size-body-small);
     width: 100%;
 
     svg {
@@ -244,17 +242,6 @@ p {
     }
 }
 
-#github-link:hover,
-#linkedin-link:hover {
-    background-color: var(--light-foam);
-
-    svg {
-        path {
-            fill: var(--light-highlight-1);
-        }
-    }
-}
-
 #resume-link {
     display: flex;
     justify-content: center;
@@ -270,29 +257,22 @@ p {
     }
 }
 
-#resume-link:hover {
-    background-color: var(--light-iris);
-    color: var(--light-highlight-1);
-
-    svg {
-        path {
-            fill: var(--light-highlight-1);
-        }
-    }
-}
-
 .about-me-right-container {
     width: 60%;
 }
 
 .tech-stack-content-container {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    /* display: grid; */
+    /* grid-template-columns: repeat(3, 1fr); */
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
     gap: 2rem;
     margin: 2rem 0;
 }
 
 .tech-stack-content-item-container {
+    width: 31%;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -304,7 +284,7 @@ p {
     transition: background-color 0.2s ease;
 
     p {
-        font-size: 1.8rem;
+        font-size: var(--font-size-body-small);
         color: var(--light-font-2);
     }
 }
@@ -335,7 +315,7 @@ p {
     transition: background-color 0.2s ease;
 
     p {
-        font-size: 1.8rem;
+        font-size: var(--font-size-body-small);
         color: var(--dark-font-3);
     }
 }
@@ -354,7 +334,7 @@ p {
 }
 
 .copyright {
-    font-size: 1.6rem;
+    font-size: var(--font-size-body-smaller);
     text-align: center;
     margin: 0 0 5rem 0;
 }
@@ -373,7 +353,7 @@ p {
     border-radius: 1rem;
     text-align: center;
     color: var(--dark-highlight-1);
-    font-size: 1.8rem;
+    font-size: var(--font-size-body-small);
     transition:
         background-color 0.15s ease,
         color 0.15s ease;
@@ -383,26 +363,98 @@ p {
     background-color: var(--dark-foam);
 }
 
-.demo-link:hover {
-    background-color: var(--light-foam);
-    color: var(--light-highlight-1);
-
-    svg,
-    path {
-        fill: var(--light-highlight-1);
-    }
-}
-
 .source-link {
     background-color: var(--dark-iris);
 }
 
-.source-link:hover {
-    background-color: var(--light-iris);
-    color: var(--light-highlight-1);
+@media (min-width: 1500px) {
+    html {
+        font-size: 62.5%;
+    }
 
-    svg,
-    path {
-        fill: var(--light-highlight-1);
+    html::-webkit-scrollbar-thumb:hover {
+        background-color: var(--dark-rose);
+    }
+
+    .demo-link:hover {
+        background-color: var(--light-foam);
+        color: var(--light-highlight-1);
+
+        svg,
+        path {
+            fill: var(--light-highlight-1);
+        }
+    }
+
+    #github-link:hover,
+    #linkedin-link:hover {
+        background-color: var(--light-foam);
+
+        svg {
+            path {
+                fill: var(--light-highlight-1);
+            }
+        }
+    }
+
+    #resume-link:hover {
+        background-color: var(--light-iris);
+        color: var(--light-highlight-1);
+
+        svg {
+            path {
+                fill: var(--light-highlight-1);
+            }
+        }
+    }
+
+    .source-link:hover {
+        background-color: var(--light-iris);
+        color: var(--light-highlight-1);
+
+        svg,
+        path {
+            fill: var(--light-highlight-1);
+        }
+    }
+}
+
+@media (min-width: 800px) and (max-width: 1499px) {
+    html {
+        font-size: 56.25%;
+    }
+}
+
+@media (min-width: 400px) and (max-width: 799px) {
+    html {
+        font-size: 50%;
+    }
+
+    .tech-stack-content-item-container {
+        width: 45%;
+    }
+
+    .tech-stack-content-item-container:last-child {
+        margin: auto;
+    }
+
+    .project-content-item-container {
+        text-align: center;
+        flex-direction: column;
+    }
+}
+
+@media (max-width: 399px) {
+    html {
+        font-size: 43.75%;
+    }
+
+    .tech-stack-content-item-container {
+        width: 100%;
+    }
+
+    .project-content-item-container {
+        text-align: center;
+        flex-direction: column;
     }
 }
