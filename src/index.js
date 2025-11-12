@@ -1,4 +1,4 @@
-const colors = {
+const Colors = {
     darkBg1: "#191724",
     darkBg2: "#1f1d2e",
     darkBg3: "#26233a",
@@ -68,8 +68,8 @@ function changeLinkTheme(
 
 function changeTheme(theme) {
     if (theme === "light") {
-        document.querySelector("body").style.backgroundColor = colors.lightBg1;
-        document.querySelector("body").style.color = colors.lightFont1;
+        document.querySelector("body").style.backgroundColor = Colors.lightBg1;
+        document.querySelector("body").style.color = Colors.lightFont1;
         document.querySelectorAll(".nav-link").forEach((el) => {
             el.classList.remove("dark-font-1");
             el.classList.add("light-font-1");
@@ -88,8 +88,8 @@ function changeTheme(theme) {
             el.classList.add("light-bg-3");
         });
     } else {
-        document.querySelector("body").style.backgroundColor = colors.darkBg1;
-        document.querySelector("body").style.color = colors.darkFont1;
+        document.querySelector("body").style.backgroundColor = Colors.darkBg1;
+        document.querySelector("body").style.color = Colors.darkFont1;
         document.querySelectorAll(".nav-link").forEach((el) => {
             el.classList.remove("light-font-1");
             el.classList.add("dark-font-1");
