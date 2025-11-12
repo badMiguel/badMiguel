@@ -425,7 +425,7 @@ p {
     }
 }
 
-@media (min-width: 400px) and (max-width: 799px) {
+@media (min-width: 450px) and (max-width: 799px) {
     html {
         font-size: 50%;
     }
@@ -444,7 +444,7 @@ p {
     }
 
     .tech-stack-content-item-container {
-        width: 45%;
+        width: 47%;
     }
 
     .tech-stack-content-item-container:last-child {
@@ -457,7 +457,7 @@ p {
     }
 }
 
-@media (max-width: 399px) {
+@media (max-width: 449px) {
     html {
         font-size: 43.75%;
     }
