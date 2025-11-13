@@ -111,6 +111,14 @@ html::-webkit-scrollbar-thumb {
     background-color: var(--dark-highlight-2);
 }
 
+.hamburger-container-light {
+    background-color: var(--light-highlight-1);
+}
+
+.hamburger-container-dark {
+    background-color: var(--dark-highlight-1);
+}
+
 body {
     font-family: var(--font-family-body);
     font-size: var(--font-size-body);
@@ -141,30 +149,42 @@ body {
     transition: background-color 0.2s ease;
 }
 
-.hamburger-container {
+.hamburger-link-container {
     position: fixed;
-    top: 2%;
-    left: 3%;
+    top: 6rem;
+    left: 2rem;
 
-    background-color: var(--light-bg-3);
-    padding: 2rem 3rem 1rem 2rem;
+    padding: 2rem 2rem 1rem 2rem;
     border-radius: 1rem;
 
     display: flex;
-    gap: 2rem;
+    flex-direction: column;
+
+    opacity: 0;
+    max-height: 0px;
+    transition:
+        max-height 0.2s ease-out,
+        opacity 0.2s ease-out;
+    z-index: 1000;
 }
 
-.hamburger-link-container {
-    display: flex;
-    flex-direction: column;
+.hamburger-link-container.show {
+    opacity: 1;
+    max-height: 16rem;
 }
 
 .hamburger-link {
     text-decoration: none;
     margin: 0 0 1rem 0;
+    font-weight: 500;
 }
 
 .hamburger-menu {
+    z-index: 1000;
+    position: fixed;
+    top: 2rem;
+    left: 3rem;
+
     cursor: pointer;
     display: flex;
     flex-direction: column;
