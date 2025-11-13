@@ -166,11 +166,14 @@ body {
         max-height 0.2s ease-out,
         opacity 0.2s ease-out;
     z-index: 1000;
+
+    pointer-events: none;
 }
 
 .hamburger-link-container.show {
     opacity: 1;
     max-height: 18rem;
+    pointer-events: auto;
 }
 
 .hamburger-link {
@@ -193,7 +196,7 @@ body {
 
     .burger-part {
         width: 3rem;
-        height: 0.4rem;
+        height: 0.35rem;
         border-radius: 2rem;
         transition: background-color 0.4s ease;
     }
