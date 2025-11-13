@@ -431,6 +431,20 @@ function main(logger) {
     });
 
     hamburgerMenu(positionY, sections);
+
+    document.querySelectorAll(".home-subtext").forEach((el) => {
+        el.addEventListener("mouseover", () => {
+            if (showHover()) {
+                el.style.color = Colors.lightFont1;
+            }
+        });
+
+        el.addEventListener("mouseout", () => {
+            if (showHover()) {
+                el.style.color = Colors.lightFont2;
+            }
+        });
+    });
 }
 
 class DebugLogger {

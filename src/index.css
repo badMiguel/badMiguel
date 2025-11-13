@@ -221,7 +221,7 @@ body {
 
     .burger-top-part.close {
         transform-origin: left center;
-        transform: rotate(45deg) translate(-0.2rem);
+        transform: rotate(45deg)translate(-0.2rem);
     }
 
     .burger-middle-part.close {
@@ -232,6 +232,12 @@ body {
         transform-origin: left center;
         transform: rotate(-45deg) translate(-0.2rem);
     }
+}
+
+.home-subtext {
+    color: var(--light-font-2);
+    transition: color 0.3s ease;
+    cursor: default;
 }
 
 h1 {
