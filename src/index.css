@@ -154,7 +154,7 @@ body {
     top: 6rem;
     left: 2rem;
 
-    padding: 2rem 2rem 1rem 2rem;
+    padding: 2rem 2rem 0.5rem 2rem;
     border-radius: 1rem;
 
     display: flex;
@@ -178,8 +178,9 @@ body {
 
 .hamburger-link {
     text-decoration: none;
-    margin: 0 0 1rem 0;
+    margin: 0 0 1.5rem 0;
     font-weight: 500;
+    line-height: 1;
 }
 
 .hamburger-menu {
@@ -192,36 +193,29 @@ body {
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
-    margin: 0.8rem 0 0 0;
 
     .burger-part {
         width: 3rem;
         height: 0.35rem;
         border-radius: 2rem;
-        transition: background-color 0.4s ease;
+        transition:
+            background-color 0.4s ease,
+            transform 0.2s ease,
+            opacity 0.2s ease;
+
+        transform-origin: center center;
     }
 
     .burger-top-part {
-        transform-origin: left center;
         transform: rotate(0deg);
-        transition: transform 0.2s ease;
-    }
-
-    .burger-middle-part {
-        transition:
-            transform 0.2s ease,
-            opacity 0.2s ease;
     }
 
     .burger-bottom-part {
-        transform-origin: left center;
         transform: rotate(0deg);
-        transition: transform 0.2s ease;
     }
 
-    .burger-top-part.close {
-        transform-origin: left center;
-        transform: rotate(45deg)translate(-0.2rem);
+        .burger-top-part.close {
+        transform: translateY(0.85rem) rotate(45deg);
     }
 
     .burger-middle-part.close {
@@ -229,8 +223,7 @@ body {
     }
 
     .burger-bottom-part.close {
-        transform-origin: left center;
-        transform: rotate(-45deg) translate(-0.2rem);
+        transform: translateY(-0.85rem) rotate(-45deg);
     }
 }
 
