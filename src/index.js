@@ -240,7 +240,6 @@ function hamburgerMenu(positionY, sections) {
 }
 
 function main(logger) {
-    document.getElementById("copyright-year").textContent = new Date().getFullYear();
     const isReduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
     const sections = {
