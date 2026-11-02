@@ -356,12 +356,11 @@
                         <div class="project-content-item-text-container">
                             <h3>Cozy Park</h3>
                             <p>
-                                A simple 2D co-op game written in plain Javascript using
-                                the Canvas API for the frontend and a websocket server written
-                                in Go at the backend. The webserver allows clients to receive
-                                and send out movement information from and to other users,
-                                which helps update the location and state of each user on the
-                                game.
+                                A simple 2D co-op game written in plain JavaScript using
+                                the Canvas API for the frontend and a server-authoritative
+                                WebSocket backend written in Go, which keeps the location and
+                                state of every player in sync in real time. The game is deployed
+                                on a Linux VPS behind an Nginx reverse proxy.
                             </p>
                             <div class="project-link-container">
                                 <a class="project-link demo-link" href="https://cozypark.badmiguel.com" target="_blank">
@@ -465,14 +464,13 @@
                     <div class="project-content-item-container">
                         <img class="project-image" src="/assets/echolingo.webp" alt="EchoLingo" />
                         <div class="project-content-item-text-container">
-                            <h3>Echolingo</h3>
+                            <h3>EchoLingo</h3>
                             <p>
                                 EchoLingo is a mobile application built on React Native with
                                 Expo Framework that aims to teach and improve students' Tiwi
                                 language skills. The app provides an easy-to-use interface to
-                                display a list of sentences provided by the teacher. The app
-                                also provides an interface for teachers to update the database
-                                to be available for everyone.
+                                display sentences provided by the teacher, with Firebase syncing
+                                their updates in real time to help preserve the Tiwi language.
                             </p>
                             <div class="project-link-container">
                                 <a class="project-link demo-link" href="https://echolingo.badmiguel.com"
@@ -581,7 +579,8 @@
                                 Thesys is a thesis management system for CDU students,
                                 supervisors, and unit coordinators. The website is built mainly
                                 with Python's Django Framework for the backend, serving HTML
-                                template for the frontend.
+                                templates for the frontend, and uses role-based access control
+                                to automate thesis submission, review, and approval.
                             </p>
                             <div class="project-link-container">
                                 <a class="project-link demo-link" href="https://thesys.badmiguel.com" target="_blank">
